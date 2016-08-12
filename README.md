@@ -13,7 +13,11 @@ A search plugin for fundation that includes elasticsearch functionality right ou
 
 ## Installation
 ```
-npm install git+ssh://git@gitlab.dmdmedia.net:direwolf/fundation-search.git --save --save-exact
+npm install fundation-search
+
+// or
+
+npm install git://github.com/fundation/search.git
 ```
 
 ***
@@ -197,12 +201,13 @@ This is a list of all the possible options that can be provided in the fundation
 #### => get(`Object`)  
 **Description**: Search for entries in the Elasticsearch database.  
 **Param**: Object that can contain the following keys  
+
 1. `index`   
   * Purpose: To indicate which index to search by  
   * Notes: Passing it in here will override the `index' value provided in the configs (Must be in at least one of the two)
 2. `type`
   * Purpose: To indicate which type to search by    
-  * Notes: Passing it in here will override the `type` value provided in the configs (Must be in at least one of the two)    
+  * Notes: Passing it in here will override the `type` value provided in the configs (Must be in at least one of the two)   
 3. `countPerPage`  
   * Purpose: To determine how many items should be returned on each page.
   * Notes:  Passing it in here will override the `countPerPage`value provided in the configs (Must be in at least one of the two)
@@ -258,6 +263,7 @@ search.get({
 #### => index(`Object`)
 **Description**: Insert or Update objects into Elasticsearch   
 **Param**: Object that can contain the following keys
+
 1. `index`   
   * Purpose: To indicate which index to search by  
   * Notes: Passing it in here will override the `index' value provided in the configs (Must be in at least one of the two)  
@@ -299,12 +305,13 @@ var index = search.index({
 #### => delete(`Object`)
 **Description**: Delete objects in Elasticsearch   
 **Param**: Object that can contain the following keys
+
 1. `index`   
   * Purpose: To indicate which index to search by  
   * Notes: Passing it in here will override the `index' value provided in the configs (Must be in at least one of the two)
 2. `type`
   * Purpose: To indicate which type to search by    
-  * Notes: Passing it in here will override the `type` value provided in the configs (Must be in at least one of the two)    
+  * Notes: Passing it in here will override the `type` value provided in the configs (Must be in at least one of the two)   
 3. `id`
   * Purpose: To indicate which exact object to delete in Elasticsearch
   * Notes: This value is required.  
@@ -326,6 +333,7 @@ search.delete({
 #### => suggest(`Object`)
 **Description**: Get autocomplete suggestions from Elasticsearch. This method depends on a correct initial mapping (which should include a configured suggest completion field), and a correct indexing of the object (which should provide a suggest field indicating what to search by and what to return). Before using this method, you should probably read more on [how suggest works](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html).  
 **Param**: Object that can contain the following keys
+
 1. `index`   
   * Purpose: To indicate which index to search by  
   * Notes: Passing it in here will override the `index' value provided in the configs (Must be in at least one of the two)
@@ -407,12 +415,13 @@ search.delete({
 #### => bulk(`Object`)
 **Description**: Bulk Update/Insert/Delete objects from Elasticsearch   
 **Param**: Object that can contain the following keys
+
 1. `index`   
   * Purpose: To indicate which index to search by  
   * Notes: Passing it in here will override the `index' value provided in the configs (Must be in at least one of the two)
 2. `type`
   * Purpose: To indicate which type to search by    
-  * Notes: Passing it in here will override the `type` value provided in the configs (Must be in at least one of the two)    
+  * Notes: Passing it in here will override the `type` value provided in the configs (Must be in at least one of the two)   
 3. `action` 
   * Purpose: To indicate what type of action to perform on the passed in items
   * Notes: This value is required. It can be 'index', 'update', or 'delete'
@@ -450,6 +459,7 @@ search.delete({
 #### => deleteIndex(`String`)
 **Description**: Delete an index from Elasticsearch   
 **Param**: Single `String` argument
+
 1. `index`   
   * Purpose: To indicate which index to delete
   * Notes: This value is required.
@@ -467,6 +477,7 @@ search.deleteIndex('website');
 #### => createIndex(`String`)
 **Description**: Create an index in Elasticsearch   
 **Param**: Single `String` argument
+
 1. `index`   
   * Purpose: To indicate the name of the index to create  
   * Notes: This value is required. If the index already exists, it first deletes the existing index, then recreates it.
@@ -513,11 +524,11 @@ search.createIndex('website');
 ```
 
 ## Elasticsearch Client
-If the provided model api does not provide the desired functionality, you can either go into the codebase to add it directly or you can use the actual Elasticsearch.js client. This client is officially supported by Elasticsearch and is used by the search model internally. [Here is the documentation for the Elasticsearch npm module](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html).
+If the provided model api does not provide the desired functionality, the actual Elasticsearch.js client can be used. This client is officially supported by Elasticsearch and is used by the search model internally. [Here is the documentation for the Elasticsearch npm module](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html).
 ```javascript
 //instead of 
 var search = require('fundation').model.search;
 
-//get the underlying client for most control
+//get the underlying client for the most control
 var client = require('fundation').model.search.client;
 ```
